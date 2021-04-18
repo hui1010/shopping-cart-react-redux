@@ -3,12 +3,15 @@ import {useState} from 'react'
 import data from './data.json'
 import Products from './components/Products'
 import Filter from './components/Filter'
+import Cart from './components/Cart'
 
 // feature-1
 function App() {
   const [products, setProducts] = useState(data.products)
+  const [productsCopy, setProductsCopy] = useState(data.products)
   const [size, setSize] = useState("")
   const [sort, setSort] = useState("")
+  const [cartItems, setCartItems] = useState([])
 
   const sortProducts = (event) => {
     const targetSort = event.target.value
@@ -24,9 +27,29 @@ function App() {
     setSize(targetSize)
     if(targetSize) {
       setProducts(
-        products.filter(product => product.availableSizes.indexOf(targetSize) >= 0)
+        productsCopy.filter(product => product.availableSizes.indexOf(targetSize) >= 0)
       )
-    } 
+    } else {
+      setProducts(productsCopy)
+    }
+  }
+  const addToCart = (product) => {
+    const items = cartItems.slice()
+    let alreadyInCart = false
+    items.forEach(item => {
+      if(item._id === product._id) {
+        item.count++;
+        alreadyInCart = true
+      }
+    })
+    if(!alreadyInCart) {
+      items.push({...product, count: 1})
+    }
+    setCartItems(items)
+  }
+  const removeFromCart = (product) => {
+    const items = cartItems.slice()
+    setCartItems(items.filter(item => item._id !== product._id))
   }
   
 
@@ -45,10 +68,10 @@ function App() {
               sortProducts={sortProducts}
               filterProducts={filterProducts}  
             />
-            <Products products={products}/>
+            <Products products={products} addToCart={addToCart} />
           </div>
           <div className="sidebar">
-            Cart Items
+            <Cart cartItems={cartItems} removeFromCart={removeFromCart}/>
           </div>
         </div>
       </main>
