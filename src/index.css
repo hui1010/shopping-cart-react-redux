@@ -1,18 +1,23 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Montserrat&display=swap");
 
 html {
   font-size: 62.5%;
   box-sizing: border-box;
 }
 
-body, #root {
+body,
+#root {
   height: 100vh;
   margin: 0;
 }
 
-body, input, select, button, textarea {
+body,
+input,
+select,
+button,
+textarea {
   font-size: 1.6rem;
-  font-family: Montserrat, Arial, Helvetica, sans-serif
+  font-family: Montserrat, Arial, Helvetica, sans-serif;
 }
 
 a {
@@ -76,7 +81,7 @@ footer {
   list-style-type: none;
 }
 .products li {
-  flex: 1 1 29rem;
+  flex: 0 1 29rem;
   height: 47rem;
   padding: 1rem;
   margin: 1rem;
@@ -130,4 +135,49 @@ footer {
 }
 .filter div {
   flex: 1;
+}
+
+/* Cart */
+.cart {
+  padding: 1rem;
+  margin: 1rem;
+  display: flex;
+}
+.cart-header {
+  border-bottom: 0.1rem #c0c0c0 solid;
+}
+.cart-items {
+  padding: 0;
+  width: 100%;
+  list-style-type: none;
+}
+.cart-items img {
+  width: 5rem;
+  height: 5rem;
+}
+.cart-items li {
+  display: flex;
+}
+.cart-items li div {
+  padding: 0.5rem;
+}
+.cart-items li div:last-child {
+  flex: 1;
+}
+.right {
+  text-align: right;
+}
+.total {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+}
+.total div,
+.total button {
+  flex: 1;
+  text-align: center;
+}
+.total div {
+  font-size: 2rem;
 }

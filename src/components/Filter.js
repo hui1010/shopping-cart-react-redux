@@ -1,8 +1,6 @@
-import React, {useState} from 'react'
+import React from 'react'
 
 function Filter({count, size, sort, sortProducts, filterProducts}) {
-
-    
 
     return (
         <div className="filter"> 
