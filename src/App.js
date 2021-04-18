@@ -11,7 +11,7 @@ function App() {
   const [productsCopy, setProductsCopy] = useState(data.products)
   const [size, setSize] = useState("")
   const [sort, setSort] = useState("")
-  const [cartItems, setCartItems] = useState([])
+  const [cartItems, setCartItems] = useState(JSON.parse(localStorage.getItem("cartItems")) ? JSON.parse(localStorage.getItem("cartItems")) : [])
 
   const sortProducts = (event) => {
     const targetSort = event.target.value
@@ -46,10 +46,16 @@ function App() {
       items.push({...product, count: 1})
     }
     setCartItems(items)
+    localStorage.setItem("cartItems", JSON.stringify(items))
   }
   const removeFromCart = (product) => {
     const items = cartItems.slice()
     setCartItems(items.filter(item => item._id !== product._id))
+    localStorage.setItem("cartItems", JSON.stringify(items.filter(item => item._id !== product._id)))
+  }
+
+  const createOrder = (order) => {
+    console.log("hi")
   }
   
 
@@ -71,7 +77,7 @@ function App() {
             <Products products={products} addToCart={addToCart} />
           </div>
           <div className="sidebar">
-            <Cart cartItems={cartItems} removeFromCart={removeFromCart}/>
+            <Cart cartItems={cartItems} removeFromCart={removeFromCart} createOrder={createOrder}/>
           </div>
         </div>
       </main>
